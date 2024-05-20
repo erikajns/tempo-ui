@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+  }
+  
+  .mainContent {
+    flex-grow: 1;
+    padding: 20px;
+    background-color: #f0f0f0;
+    margin-top: 64px; /* Adjust this value based on the height of the TopBar */
+  }
+  
+  .topBar {
+    z-index: 1200; /* Ensure TopBar is above other elements */
+  }
+  
+  .sideBar {
+    margin-top: 64px; /* Adjust this value based on the height of the TopBar */
+    z-index: 1100; /* Ensure SideBar is below the TopBar but above main content */
+  }
+  

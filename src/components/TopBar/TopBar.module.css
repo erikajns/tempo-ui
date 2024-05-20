@@ -1,0 +1,73 @@
+.appBar {
+    z-index: 1400;
+  }
+  
+  .search {
+    position: relative;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.15);
+    margin-right: 16px;
+    width: 100%;
+  }
+  
+  .searchIcon {
+    padding: 10px;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .inputRoot {
+    color: #FFFFFF;
+  }
+  
+  .inputInput {
+    padding: 8px 8px 8px 0;
+    padding-left: calc(1em + 32px);
+    width: 100%;
+    transition: width 0.3s;
+  }
+  
+  .grow {
+    flex-grow: 1;
+  }
+  .topBar {
+    z-index: 1200;
+  }
+  
+  .search {
+    position: relative;
+    border-radius: 4px;
+    background-color: rgba(255, 255, 255, 0.15);
+    margin-right: 16px;
+    width: 70%;
+  }
+  
+  .searchIcon {
+    padding: 10px;
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .inputInput {
+    padding: 8px 8px 8px 0;
+    padding-left: calc(1em + 32px);
+    width: 100%;
+    transition: width 0.3s;
+  }
+  
+  .grow {
+    flex-grow: 1;
+  }
+
+  .MuiInputBase-root {
+    color: #FFFFFF;
+  }
+  

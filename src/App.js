@@ -1,25 +1,39 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { CssBaseline, Box, Grid } from '@mui/material';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { TopBar, SideBar } from './components';
+import './index.css'
+import Dashboard from './pages/Dashboard/Dashboard';
+import Shifts from './pages/Shifts/Shifts';
+import Finance from './pages/Finance/Finance';
+import People from './pages/People/People'
 
-function App() {
+// App component sets up the main layout and routing for the application
+const App = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <CssBaseline />
+      {/* TopBar component */}
+      <TopBar />
+      <Grid container>
+        {/* SideBar component */}
+        <Grid item xs={12} sm={3}>
+          <SideBar />
+        </Grid>
+        {/* Main content area */}
+        <Grid item xs={12}>
+          <Box className="main-content">
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path='/shifts' element={<Shifts />} />
+              <Route path='/finance' element={<Finance />} />
+              <Route path='/people' element={<People />} />
+            </Routes>
+          </Box>
+        </Grid>
+      </Grid>
+    </Router>
   );
-}
+};
 
 export default App;
