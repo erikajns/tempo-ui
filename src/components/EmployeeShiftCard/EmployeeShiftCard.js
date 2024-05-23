@@ -8,7 +8,7 @@ const EmployeeShiftCard = ({ role, name, hours, overtime, image, isAssigned }) =
   const classes = useStyles();
 
   return (
-    <Card className={classes.card}>
+    <Card className={classes.card} elevation={0}>
       <Avatar src={image} alt={name || "Default"} className={classes.image}>
         {!image && <PersonIcon />}
       </Avatar>

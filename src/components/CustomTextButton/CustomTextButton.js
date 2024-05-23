@@ -3,26 +3,22 @@ import PropTypes from 'prop-types';
 import { Button } from '@mui/material';
 import useStyles from './CustomTextButton.styles';
 
-const CustomTextButton = ({ text, icon: Icon, onClick }) => {
+const CustomTextButton = ({ text = '', icon: Icon = null }) => {
   const classes = useStyles();
 
   return (
-    <Button onClick={onClick} className={classes.button}>
-      {Icon && <Icon className={classes.icon} />}
+    <Button
+      className={classes.button}
+      startIcon={Icon ? <Icon /> : null}
+    >
       {text}
     </Button>
   );
 };
 
 CustomTextButton.propTypes = {
-  text: PropTypes.string.isRequired,
+  text: PropTypes.string,
   icon: PropTypes.elementType,
-  onClick: PropTypes.func,
-};
-
-CustomTextButton.defaultProps = {
-  icon: null,
-  onClick: () => {},
 };
 
 export default CustomTextButton;

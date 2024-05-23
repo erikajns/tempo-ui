@@ -6,12 +6,9 @@ const useStyles = makeStyles({
     flexDirection: 'row',
     justifyContent: 'start',
     alignItems: 'center',
-    padding: '16px',
-    margin: '8px',
-    backgroundColor: '#1C1C1E',
+    backgroundColor: 'transparent !important',
     border: 'none',
     color: 'white',
-    borderRadius: '8px',
   },
   image: {
     width: '80px',
