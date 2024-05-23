@@ -1,5 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
+import EmployeeShiftCard from '../../components/EmployeeShiftCard/EmployeeShiftCard';
 
 // Dashboard component renders the main content area for the dashboard page
 const Shifts = () => {
