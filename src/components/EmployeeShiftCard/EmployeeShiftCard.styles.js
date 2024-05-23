@@ -11,15 +11,19 @@ const useStyles = makeStyles({
     color: 'white',
   },
   image: {
-    width: '80px',
-    height: '80px',
+    width: '60px !important',
+    height: '60px !important',
     marginRight: '16px',
   },
   overtime: {
     color: 'red',
   },
   whiteText: {
-    color: 'white',
+    color: 'white !important',
+  },
+  employeeInfo: {
+    textAlign: 'left',
+    padding: '0px !important'
   }
 });
 

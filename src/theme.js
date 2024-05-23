@@ -1,6 +1,59 @@
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
+  typography: {
+    fontFamily: 'Inter, Arial, sans-serif',
+    h1: {
+      fontFamily: 'Inter, Arial, sans-serif',
+      fontWeight: 700,
+      fontSize: '2.5rem',
+      lineHeight: 1.2,
+    },
+    h2: {
+      fontFamily: 'Inter, Arial, sans-serif',
+      fontWeight: 600,
+      fontSize: '2rem',
+      lineHeight: 1.3,
+    },
+    h3: {
+      fontFamily: 'Inter, Arial, sans-serif',
+      fontWeight: 500,
+      fontSize: '1.75rem',
+      lineHeight: 1.4,
+    },
+    body1: {
+      fontFamily: 'Inter, Arial, sans-serif',
+      fontWeight: 400,
+      fontSize: '1rem',
+      lineHeight: 1.5,
+    },
+    body2: {
+      fontFamily: 'Inter, Arial, sans-serif',
+      fontWeight: 400,
+      fontSize: '0.875rem',
+      lineHeight: 1.5,
+    },
+    caption: {
+      fontFamily: 'Inter, Arial, sans-serif',
+      fontWeight: 400,
+      fontSize: '0.75rem',
+      lineHeight: 1.66,
+    },
+    button: {
+      fontFamily: 'Inter, Arial, sans-serif',
+      fontWeight: 600,
+      fontSize: '0.875rem',
+      lineHeight: 1.75,
+      textTransform: 'none',
+    },
+    overline: {
+      fontFamily: 'Inter, Arial, sans-serif',
+      fontWeight: 400,
+      fontSize: '0.75rem',
+      lineHeight: 2.66,
+      textTransform: 'none',
+    },
+  },
   palette: {
     mode: 'dark',
     primary: {
