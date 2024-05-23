@@ -3,6 +3,7 @@ import { Drawer, List, ListItemButton, ListItemIcon, ListItemText, Typography } 
 import { AttachMoney, AutoAwesome, CalendarMonth, People } from '@mui/icons-material';
 import { NavLink } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
+import customStyles from './SideBar.module.css';
 
 // Styles for the SideBar component
 const useStyles = makeStyles((theme) => ({
@@ -65,7 +66,7 @@ const SideBar = () => {
             className={({ isActive }) => (isActive ? classes.active : '')}
             classes={{ root: classes.listItem }}
           >
-            <ListItemIcon className={ { root: classes.listItemIcon}}>{item.icon}</ListItemIcon>
+            <ListItemIcon className={ customStyles.sidebarIcon }>{item.icon}</ListItemIcon>
             <ListItemText
               primary={
                 <Typography className={classes.listItemText} align="center">
