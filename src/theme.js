@@ -21,10 +21,16 @@ const theme = createTheme({
       fontSize: '1.75rem',
       lineHeight: 1.4,
     },
+    h6: {
+      fontFamily: 'Inter, Arial, sans-serif',
+      fontWeight: 500,
+      fontSize: '1rem',
+      lineHeight: 1.4,
+    },
     body1: {
       fontFamily: 'Inter, Arial, sans-serif',
       fontWeight: 400,
-      fontSize: '1rem',
+      fontSize: '0.8rem',
       lineHeight: 1.5,
     },
     body2: {
