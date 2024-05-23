@@ -12,7 +12,6 @@ const ShiftManager = ({ columns, events, unassignedShifts, assignedShifts }) => 
       p={2} 
       bgcolor="#000000" 
       borderRadius="16px"
-      style={{ border: '2px solid #38383A' }}
     >
       <Box display="flex" justifyContent="space-between" alignItems="center" marginBottom="16px">
         <Box display="flex" gap="16px">
@@ -21,7 +20,7 @@ const ShiftManager = ({ columns, events, unassignedShifts, assignedShifts }) => 
           <CustomTextButton text="All shifts" icon={GroupIcon} />
           <CustomTextButton text="Group by assignment" icon={GroupIcon} />
         </Box>
-        <CustomTextButton text="+ Shift" icon={AddIcon} />
+        <CustomTextButton text="Shift" icon={AddIcon} />
       </Box>
       <Box borderBottom="2px solid #38383A" marginBottom="16px" />
       <ShiftTable 

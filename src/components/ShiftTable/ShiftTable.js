@@ -26,40 +26,52 @@ const ShiftTable = ({ columns, events, unassignedShifts, assignedShifts }) => {
             ))}
           </TableRow>
           <TableRow>
-            <TableCell className={classes.tableHeader} align="center">Events</TableCell>
+            <TableCell className={classes.tableHeader} align="right">Events</TableCell>
             {events.map((event, index) => (
-              <TableCell key={index} align="center" className={classes.tableCell}>
+              <TableCell
+                key={index}
+                align="center"
+                className={`${classes.tableCell} ${classes.clickableCell} ${index === 0 ? classes.eventCellStart : ''} ${index === events.length - 1 ? classes.eventCellEnd : ''}`}
+              >
                 {event}
               </TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
-          <TableRow>
-            <TableCell className={classes.sectionTitle}>Unassigned Shifts</TableCell>
+          <TableRow className={classes.sectionRow}>
+            <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>Unassigned Shifts</TableCell>
           </TableRow>
           {unassignedShifts.map((shift, index) => (
             <TableRow key={index} className={classes.shiftRow}>
-              <TableCell className={classes.shiftCell} align="center">
+              <TableCell className={`${classes.shiftCell}`} align="center">
                 <EmployeeShiftCard {...shift} />
               </TableCell>
               {columns.map((_, idx) => (
-                <TableCell key={idx} align="center" className={classes.tableCell}>
+                <TableCell
+                  key={idx}
+                  align="center"
+                  className={`${classes.tableCell} ${classes.clickableCell} ${idx === columns.length - 1 ? classes.shiftCellEnd : ''}`}
+                >
                   <Typography variant="body2">3:30pm - 10:00pm</Typography>
                 </TableCell>
               ))}
             </TableRow>
           ))}
-          <TableRow>
-            <TableCell className={classes.sectionTitle}>Assigned Shifts</TableCell>
+          <TableRow className={classes.sectionRow}>
+            <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>Assigned Shifts</TableCell>
           </TableRow>
           {assignedShifts.map((shift, index) => (
             <TableRow key={index} className={classes.shiftRow}>
-              <TableCell className={classes.shiftCell} align="center">
+              <TableCell className={`${classes.shiftCell}`} align="center">
                 <EmployeeShiftCard {...shift} />
               </TableCell>
               {columns.map((_, idx) => (
-                <TableCell key={idx} align="center" className={classes.tableCell}>
+                <TableCell
+                  key={idx}
+                  align="center"
+                  className={`${classes.tableCell} ${classes.clickableCell} ${idx === columns.length - 1 ? classes.shiftCellEnd : ''}`}
+                >
                   <Typography variant="body2">3:30pm - 10:00pm</Typography>
                 </TableCell>
               ))}

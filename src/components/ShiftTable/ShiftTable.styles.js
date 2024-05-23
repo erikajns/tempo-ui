@@ -17,20 +17,30 @@ const useStyles = makeStyles({
   },
   tableCell: {
     backgroundColor: '#1C1C1E',
-    color: 'white',
+    color: 'rgba(235, 235, 245, 0.6)',
     height: '68px',
     border: '2px solid #000000',
+  },
+  clickableCell: {
     cursor: 'pointer',
+    backgroundColor: '#1C1C1E !important',
+    '&:hover': {
+      backgroundColor: '#3A3A3C !important',
+      color: 'white',
+    },
   },
   sectionTitle: {
-    backgroundColor: '#000000',
+    backgroundColor: '#000000 !important',
     color: 'white',
     height: '29px',
-    textAlign: 'center',
+    textAlign: 'left',
     borderBottom: '2px solid #000000',
-    float: 'left',
     textTransform: 'uppercase',
-    color: 'rgba(235, 235, 245, 0.6)',
+    padding: '8px',
+  },
+  sectionRow: {
+    backgroundColor: '#000000',
+    height: '29px',
   },
   shiftRow: {
     height: '68px',
@@ -40,7 +50,19 @@ const useStyles = makeStyles({
   },
   shiftCell: {
     backgroundColor: '#1C1C1E',
-    border: '2px solid #000000',
+    borderRadius: '10px 0 0 10px',
+  },
+  shiftCellEnd: {
+    backgroundColor: '#1C1C1E',
+    borderRadius: '0 10px 10px 0',
+  },
+  eventCellStart: {
+    backgroundColor: '#1C1C1E',
+    borderRadius: '10px 0 0 10px',
+  },
+  eventCellEnd: {
+    backgroundColor: '#1C1C1E',
+    borderRadius: '0 10px 10px 0',
   },
 });
 
