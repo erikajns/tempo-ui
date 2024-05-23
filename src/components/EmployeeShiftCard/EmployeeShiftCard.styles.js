@@ -7,11 +7,9 @@ const useStyles = makeStyles({
     justifyContent: 'start',
     alignItems: 'center',
     padding: '16px',
-    margin: '8px',
-    backgroundColor: '#1C1C1E',
+    backgroundColor: 'transparent',
     border: 'none',
     color: 'white',
-    borderRadius: '8px',
   },
   image: {
     width: '80px',
