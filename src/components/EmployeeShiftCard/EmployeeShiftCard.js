@@ -12,11 +12,11 @@ const EmployeeShiftCard = ({ role, name, hours, overtime, image, isAssigned }) =
       <Avatar src={image} alt={name || "Default"} className={classes.image}>
         {!image && <PersonIcon />}
       </Avatar>
-      <CardContent>
-        <Typography variant="h6" className={classes.whiteText}>{role}</Typography>
-        {isAssigned && <Typography variant="h5" className={classes.whiteText}>{name}</Typography>}
-        <Typography variant="body1" className={classes.whiteText}>
-          {hours}hr, {overtime && <span className={classes.overtime}>{`${overtime}hr OT`}</span>}
+      <CardContent className={classes.employeeInfo}>
+        <Typography variant="body1">{role}</Typography>
+        {isAssigned && <Typography variant="h6" className={classes.whiteText}>{name}</Typography>}
+        <Typography variant="body1">
+          {hours}hr{(hours && overtime) && ','} {overtime && <span className={classes.overtime}>{`${overtime}hr OT`}</span>}
         </Typography>
       </CardContent>
     </Card>
