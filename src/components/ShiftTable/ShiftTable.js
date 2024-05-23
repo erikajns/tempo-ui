@@ -16,31 +16,35 @@ const ShiftTable = ({ columns, events, unassignedShifts, assignedShifts }) => {
             <TableCell className={classes.tableHeader} align="center">
               <Box display="flex" alignItems="center" gap="8px">
                 <NotificationsOutlinedIcon />
-                3 conflicts, 2 unassigned, 4 overtime
+                <Typography variant="body2">3 conflicts, 2 unassigned, 4 overtime</Typography>
               </Box>
             </TableCell>
             {columns.map((column, index) => (
-              <TableCell key={index} align="center" className={classes.tableHeader}>
-                {column}
+              <TableCell key={index} align="center" className={`${classes.tableHeader} ${classes.dateHeader}`}>
+                <Typography variant='h6'>{column}</Typography>
               </TableCell>
             ))}
           </TableRow>
           <TableRow>
-            <TableCell className={classes.tableHeader} align="right">Events</TableCell>
+            <TableCell className={classes.tableHeader} align="center">
+              <Typography variant="body1">Events</Typography>
+            </TableCell>
             {events.map((event, index) => (
               <TableCell
                 key={index}
                 align="center"
                 className={`${classes.tableCell} ${classes.clickableCell} ${index === 0 ? classes.eventCellStart : ''} ${index === events.length - 1 ? classes.eventCellEnd : ''}`}
               >
-                {event}
+                <Typography variant="body2">{event}</Typography>
               </TableCell>
             ))}
           </TableRow>
         </TableHead>
         <TableBody>
           <TableRow className={classes.sectionRow}>
-            <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>Unassigned Shifts</TableCell>
+            <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>
+              <Typography variant="body1">Unassigned Shifts</Typography>
+            </TableCell>
           </TableRow>
           {unassignedShifts.map((shift, index) => (
             <TableRow key={index} className={classes.shiftRow}>
@@ -59,7 +63,9 @@ const ShiftTable = ({ columns, events, unassignedShifts, assignedShifts }) => {
             </TableRow>
           ))}
           <TableRow className={classes.sectionRow}>
-            <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>Assigned Shifts</TableCell>
+            <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>
+              <Typography variant="body1">Assigned Shifts</Typography>
+            </TableCell>
           </TableRow>
           {assignedShifts.map((shift, index) => (
             <TableRow key={index} className={classes.shiftRow}>

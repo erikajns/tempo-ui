@@ -91,15 +91,8 @@ const theme = createTheme({
         head: {
           backgroundColor: '#000000',
           color: 'white',
-          height: '68px',
           border: '2px solid #000000',
-        },
-      },
-    },
-    MuiTypography: {
-      styleOverrides: {
-        root: {
-          color: 'rgba(235, 235, 245, 0.6)',
+          textAlign: 'left'
         },
       },
     },

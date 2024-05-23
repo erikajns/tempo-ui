@@ -8,6 +8,8 @@ const Shifts = () => {
   const unassignedShifts = [
     { role: 'Bartender', name: '', hours: '48', isAssigned: false },
     { role: 'Host', name: '', hours: '48', isAssigned: false },
+    { role: 'Bartender', name: '', hours: '48', isAssigned: false },
+    { role: 'Host', name: '', hours: '48', isAssigned: false },
   ];
 
   const assignedShifts = [

@@ -2,7 +2,7 @@ import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles({
   tableContainer: {
-    marginBottom: '16px',
+    marginBottom: '0px !important',
     backgroundColor: '#000000',
     color: 'white',
     borderRadius: '16px',
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
   tableCell: {
     backgroundColor: '#1C1C1E',
-    color: 'rgba(235, 235, 245, 0.6)',
+    color: 'rgba(235, 235, 245, 0.6) !important',
     height: '68px',
     border: '2px solid #000000',
   },
@@ -26,7 +26,7 @@ const useStyles = makeStyles({
     backgroundColor: '#1C1C1E !important',
     '&:hover': {
       backgroundColor: '#3A3A3C !important',
-      color: 'white',
+      color: 'white !important',
     },
   },
   sectionTitle: {
@@ -36,11 +36,12 @@ const useStyles = makeStyles({
     textAlign: 'left',
     borderBottom: '2px solid #000000',
     textTransform: 'uppercase',
-    padding: '8px',
+    padding: '0px !important',
   },
   sectionRow: {
     backgroundColor: '#000000',
     height: '29px',
+    marginBottom: '20px'
   },
   shiftRow: {
     height: '68px',
@@ -64,6 +65,9 @@ const useStyles = makeStyles({
     backgroundColor: '#1C1C1E',
     borderRadius: '0 10px 10px 0',
   },
+  dateHeader:{
+    color: 'white !important'
+  }
 });
 
 export default useStyles;
