@@ -110,6 +110,7 @@ const theme = createTheme({
           fontSize: '14px',
           textTransform: 'none',
           borderRadius: '8px',
+          fontWeight: 400,
           '&:hover': {
             backgroundColor: '#3A3A3C',
             color: 'white',
