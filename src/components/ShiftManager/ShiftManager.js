@@ -12,6 +12,7 @@ const ShiftManager = ({ columns, events, unassignedShifts, assignedShifts }) => 
       p={2} 
       bgcolor="#000000" 
       borderRadius="16px"
+      width="100%"
     >
       <Box display="flex" justifyContent="space-between" alignItems="center" marginBottom="16px">
         <Box display="flex" gap="16px">
