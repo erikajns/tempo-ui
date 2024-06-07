@@ -18,3 +18,7 @@
 .InfoDrawer .header button svg {
     color: #ccc;
 }
+
+.hidden {
+    display: none;
+}

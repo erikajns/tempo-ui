@@ -1,7 +1,7 @@
 import React from 'react';
 import ShiftManager from '../../components/ShiftManager/ShiftManager';
 import InfoDrawer from '../../components/InfoDrawer/InfoDrawer';
-import useStyles from './Shifts.module.css'
+import useStyles from './Shifts.module.css';
 
 const Shifts = () => {
   const columns = ['Sat Feb 4', 'Sun Feb 5', 'Mon Feb 6', 'Tue Feb 7', 'Wed Feb 8', 'Thu Feb 9', 'Fri Feb 10'];

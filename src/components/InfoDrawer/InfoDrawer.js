@@ -11,7 +11,7 @@ import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Button from '@mui/material/Button'; // Import Button for reopening drawer
+import Button from '@mui/material/Button';
 import customStyles from './InfoDrawer.module.css';
 import 'animate.css';
 
@@ -20,9 +20,7 @@ const drawerWidth = 240;
 const InfoDrawer = () => {
   const [isOpen, setIsOpen] = useState(true);
 
-  // Get today's date
   const today = new Date();
-  // Format the date (e.g., 'May 23, 2024')
   const formattedDate = today.toLocaleDateString('en-US', {
     month: 'long',
     day: 'numeric',
@@ -36,7 +34,7 @@ const InfoDrawer = () => {
     if (!isOpen) {
       const timeoutId = setTimeout(() => {
         setIsOpen(false);
-      }, 2000); // Adjust the timeout value according to your animation duration
+      }, 2000);
       return () => clearTimeout(timeoutId);
     }
   }, [isOpen]);
@@ -53,9 +51,9 @@ const InfoDrawer = () => {
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
         }}
-        className={`${customStyles.InfoDrawer} ${isOpen ? 'animate__animated animate__fadeInRight' : 'animate__animated animate__fadeOutRight'}`}
+        className={`${customStyles.InfoDrawer} ${isOpen ? 'animate__animated animate__fadeInRight' : 'animate__animated animate__fadeOutRight'} ${!isOpen ? customStyles.hidden : ''}`}
       >
-        <Box className={customStyles.header} >
+        <Box className={customStyles.header}>
           <Box component="section">
             {formattedDate}
           </Box>
