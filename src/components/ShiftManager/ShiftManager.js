@@ -33,8 +33,7 @@ const ShiftManager = ({ columns, events, unassignedShifts, assignedShifts }) => 
         justifyContent="space-between"
         width="100%"
       >
-        <Box flexGrow={1} mr={isDrawerOpen ? `${DRAWER_WIDTH}px` : '0'} bgcolor="#000000" borderRadius="16px"         p={2}
->
+        <Box flexGrow={1} mr={isDrawerOpen ? `${DRAWER_WIDTH}px` : '0'} bgcolor="#000000" borderRadius="16px" p={2} maxHeight="90vh" overflow="auto">
           <Box display="flex" justifyContent="space-between" alignItems="center" marginBottom="16px">
             <Box display="flex" gap="16px">
               <CustomTextButton text="Azure Table" />

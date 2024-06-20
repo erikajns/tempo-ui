@@ -20,20 +20,22 @@ const InfoDrawer = ({drawerTitle}) => {
       sx={{
         width: 0,
         flexShrink: 0,
-        [`& .MuiDrawer-paper`]: { width: DRAWERWIDTH, boxSizing: 'border-box' },
+        [`& .MuiDrawer-paper`]: { width: DRAWERWIDTH, boxSizing: 'border-box', height: '90vh' },
       }}
       className={`${customStyles.InfoDrawer} ${isDrawerOpen ? 'animate__animated animate__fadeInRight' : 'animate__animated animate__fadeOutRight'}`}
     >
-      <Box className={customStyles.header}>
+      <Box display="flex" flexDirection="column" height="100%">
+        <Box className={customStyles.header}>
         <Box component="section">
             {drawerTitle}
           </Box>
-        <IconButton onClick={closeDrawer}>
-          <CloseIcon />
-        </IconButton>
-      </Box>
-      <Box sx={{ overflow: 'auto' }}>
-        {drawerContent}
+          <IconButton onClick={closeDrawer}>
+            <CloseIcon />
+          </IconButton>
+        </Box>
+        <Box sx={{ flexGrow: 1, overflow: 'auto', padding: 2 }}>
+          {drawerContent}
+        </Box>
       </Box>
     </Drawer>
   );
