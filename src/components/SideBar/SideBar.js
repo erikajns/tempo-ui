@@ -15,7 +15,11 @@ const useStyles = makeStyles((theme) => ({
     width: 72,
     overflowX: 'hidden',
     backgroundColor: '#1C1C1E !important',
-    color: '#cccccc'
+    color: '#cccccc',
+    marginTop: '64px',
+    boxShadow: 'none',
+    borderRadius: '0px !important',
+    border: 'none !important'
   },
   active: {
     backgroundColor: 'rgba(0, 0, 0, 0.08)',
