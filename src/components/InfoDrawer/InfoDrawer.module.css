@@ -1,24 +1,19 @@
 .InfoDrawer {
-    z-index: auto;
-}
-
-.InfoDrawer div {
-    position: unset;
-    border-radius: 16px;
-}
-
-.InfoDrawer .header {
+    transition: transform 0.3s ease-in-out;
+    margin-left: 16px;
+  }
+  
+  .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 6px 16px 0px;
-    color: #ccc;
-}
-
-.InfoDrawer .header button svg {
-    color: #ccc;
-}
-
-.hidden {
+    padding: 16px;
+    background-color: #000000;
+    color: white;
+    border-radius: 16px;
+  }
+  
+  .hidden {
     display: none;
-}
+  }
+  

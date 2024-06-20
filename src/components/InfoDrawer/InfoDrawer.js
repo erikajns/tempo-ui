@@ -1,95 +1,43 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import InboxIcon from '@mui/icons-material/MoveToInbox';
-import MailIcon from '@mui/icons-material/Mail';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import Button from '@mui/material/Button';
+import { useDrawer } from '../../context/DrawerContext';
 import customStyles from './InfoDrawer.module.css';
 import 'animate.css';
 
-const drawerWidth = 240;
+const DRAWERWIDTH = 360;
 
-const InfoDrawer = () => {
-  const [isOpen, setIsOpen] = useState(true);
-
-  const today = new Date();
-  const formattedDate = today.toLocaleDateString('en-US', {
-    month: 'long',
-    day: 'numeric',
-  });
-
-  const handleClose = () => {
-    setIsOpen(false);
-  };
-
-  useEffect(() => {
-    if (!isOpen) {
-      const timeoutId = setTimeout(() => {
-        setIsOpen(false);
-      }, 2000);
-      return () => clearTimeout(timeoutId);
-    }
-  }, [isOpen]);
+const InfoDrawer = ({drawerTitle}) => {
+  const { isDrawerOpen, drawerContent, closeDrawer } = useDrawer();
 
   return (
-    <div>
-      <Button onClick={() => setIsOpen(true)} style={{ display: isOpen ? 'none' : 'block' }}>Open Drawer</Button>
-      <Drawer
-        variant="persistent"
-        anchor="right"
-        open={isOpen}
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: { width: drawerWidth, boxSizing: 'border-box' },
-        }}
-        className={`${customStyles.InfoDrawer} ${isOpen ? 'animate__animated animate__fadeInRight' : 'animate__animated animate__fadeOutRight'} ${!isOpen ? customStyles.hidden : ''}`}
-      >
+    <Drawer
+      variant="persistent"
+      anchor="right"
+      open={isDrawerOpen}
+      sx={{
+        width: 0,
+        flexShrink: 0,
+        [`& .MuiDrawer-paper`]: { width: DRAWERWIDTH, boxSizing: 'border-box', height: '90vh' },
+      }}
+      className={`${customStyles.InfoDrawer} ${isDrawerOpen ? 'animate__animated animate__fadeInRight' : 'animate__animated animate__fadeOutRight'}`}
+    >
+      <Box display="flex" flexDirection="column" height="100%">
         <Box className={customStyles.header}>
-          <Box component="section">
-            {formattedDate}
+        <Box component="section">
+            {drawerTitle}
           </Box>
-          <IconButton onClick={handleClose}>
+          <IconButton onClick={closeDrawer}>
             <CloseIcon />
           </IconButton>
         </Box>
-        <Box sx={{ overflow: 'auto' }}>
-          <List>
-            {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider />
-          <List>
-            {['All mail', 'Trash', 'Spam'].map((text, index) => (
-              <ListItem key={text} disablePadding>
-                <ListItemButton>
-                  <ListItemIcon>
-                    {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={text} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
+        <Box sx={{ flexGrow: 1, overflow: 'auto', padding: 2 }}>
+          {drawerContent}
         </Box>
-      </Drawer>
-    </div>
+      </Box>
+    </Drawer>
   );
 };
 

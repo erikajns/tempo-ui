@@ -7,12 +7,15 @@ import Dashboard from './pages/Dashboard/Dashboard';
 import Shifts from './pages/Shifts/Shifts';
 import Finance from './pages/Finance/Finance';
 import People from './pages/People/People'
+import { DrawerProvider } from './context/DrawerContext';
+
 
 // App component sets up the main layout and routing for the application
 const App = () => {
   return (
     <Router>
       <CssBaseline />
+      <DrawerProvider>
       {/* TopBar component */}
       <TopBar />
       <Grid container>
@@ -32,6 +35,7 @@ const App = () => {
           </Box>
         </Grid>
       </Grid>
+      </DrawerProvider>
     </Router>
   );
 };

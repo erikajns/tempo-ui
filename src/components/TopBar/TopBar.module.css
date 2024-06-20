@@ -1,5 +1,6 @@
 .appBar {
     z-index: 1400;
+    box-shadow: none;
   }
   
   .search {

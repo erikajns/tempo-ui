@@ -121,6 +121,14 @@ const theme = createTheme({
         },
       },
     },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: '16px',
+          boxShadow: 'none'
+        }
+      }
+    }
   },
   spacing: 8,
 });

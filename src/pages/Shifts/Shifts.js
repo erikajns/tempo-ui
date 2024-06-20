@@ -1,6 +1,5 @@
 import React from 'react';
 import ShiftManager from '../../components/ShiftManager/ShiftManager';
-import InfoDrawer from '../../components/InfoDrawer/InfoDrawer';
 import useStyles from './Shifts.module.css';
 
 const Shifts = () => {
@@ -28,7 +27,6 @@ const Shifts = () => {
         unassignedShifts={unassignedShifts} 
         assignedShifts={assignedShifts} 
       />
-      < InfoDrawer />
     </div>
   );
 };

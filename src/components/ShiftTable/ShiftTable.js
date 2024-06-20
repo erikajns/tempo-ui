@@ -5,8 +5,14 @@ import EmployeeShiftCard from '../EmployeeShiftCard/EmployeeShiftCard';
 import useStyles from './ShiftTable.styles';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
 
-const ShiftTable = ({ columns, events, unassignedShifts, assignedShifts }) => {
+const ShiftTable = ({ columns, events, unassignedShifts, assignedShifts, onShiftClick }) => {
   const classes = useStyles();
+
+  const handleCellClick = (shift) => {
+    if (onShiftClick) {
+      onShiftClick(shift);
+    }
+  };
 
   return (
     <TableContainer component={Paper} className={classes.tableContainer}>
@@ -48,7 +54,7 @@ const ShiftTable = ({ columns, events, unassignedShifts, assignedShifts }) => {
           </TableRow>
           {unassignedShifts.map((shift, index) => (
             <TableRow key={index} className={classes.shiftRow}>
-              <TableCell className={`${classes.shiftCell}`} align="center">
+              <TableCell className={`${classes.shiftCell}`} align="center" onClick={() => handleCellClick(shift)}>
                 <EmployeeShiftCard {...shift} />
               </TableCell>
               {columns.map((_, idx) => (
@@ -69,7 +75,7 @@ const ShiftTable = ({ columns, events, unassignedShifts, assignedShifts }) => {
           </TableRow>
           {assignedShifts.map((shift, index) => (
             <TableRow key={index} className={classes.shiftRow}>
-              <TableCell className={`${classes.shiftCell}`} align="center">
+              <TableCell className={`${classes.shiftCell}`} align="center" onClick={() => handleCellClick(shift)}>
                 <EmployeeShiftCard {...shift} />
               </TableCell>
               {columns.map((_, idx) => (
@@ -94,6 +100,7 @@ ShiftTable.propTypes = {
   events: PropTypes.arrayOf(PropTypes.string).isRequired,
   unassignedShifts: PropTypes.arrayOf(PropTypes.object).isRequired,
   assignedShifts: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onShiftClick: PropTypes.func.isRequired, // Add prop type validation
 };
 
 export default ShiftTable;
