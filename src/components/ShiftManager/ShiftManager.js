@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import CustomTextButton from '../CustomTextButton/CustomTextButton';
 import AddIcon from '@mui/icons-material/Add';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
@@ -8,23 +8,34 @@ import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, 
 import EmployeeShiftCard from '../EmployeeShiftCard/EmployeeShiftCard';
 import { useDrawer } from '../../context/DrawerContext';
 import InfoDrawer from '../InfoDrawer/InfoDrawer';
+import AddShiftForm from '../AddShiftForm/AddShiftForm';
+import UnassignedShiftDetails from '../UnassignedShiftDetails/UnassignedShiftDetails';
+import AssignedShiftDetails from '../AssignedShiftDetails/AssignedShiftDetails';
 import useStyles from './ShiftManager.styles';
 
 const DRAWER_WIDTH = 360;
 
-const ShiftManager = ({ columns, events, unassignedShifts, assignedShifts }) => {
-  const { isDrawerOpen, openDrawer } = useDrawer();
+const ShiftManager = ({ columns, events, unassignedShifts: initialUnassignedShifts, assignedShifts }) => {
+  const { isDrawerOpen, openDrawer, closeDrawer } = useDrawer();
   const classes = useStyles();
+  const [unassignedShifts, setUnassignedShifts] = useState(initialUnassignedShifts);
 
   const handleAddShiftClick = () => {
-    openDrawer(
-      <Box p={2}>
-        <Typography variant="h6">Add Shift</Typography>
-        <Typography>Select a day this week</Typography>
-        {/* Agrega más contenido para el formulario de agregar turno aquí */}
-      </Box>
-    );
+    openDrawer(<AddShiftForm onClose={closeDrawer} onSave={handleSaveShift} />);
   };
+
+  const handleSaveShift = (newShift) => {
+    setUnassignedShifts([...unassignedShifts, newShift]);
+    closeDrawer();
+  };
+
+  const handleUnnasignedShiftClick = () => {
+    openDrawer(<UnassignedShiftDetails />)
+  }
+
+  const handleAsignedShiftClick = () => {
+    openDrawer(<AssignedShiftDetails />)
+  }
 
   return (
     <>
@@ -85,6 +96,7 @@ const ShiftManager = ({ columns, events, unassignedShifts, assignedShifts }) => 
                     </TableCell>
                     {columns.map((_, idx) => (
                       <TableCell
+                        onClick={handleUnnasignedShiftClick}
                         key={idx}
                         align="center"
                         className={`${classes.tableCell} ${classes.clickableCell} ${idx === columns.length - 1 ? classes.shiftCellEnd : ''}`}
@@ -104,6 +116,7 @@ const ShiftManager = ({ columns, events, unassignedShifts, assignedShifts }) => 
                     </TableCell>
                     {columns.map((_, idx) => (
                       <TableCell
+                        onClick={handleAsignedShiftClick}
                         key={idx}
                         align="center"
                         className={`${classes.tableCell} ${classes.clickableCell} ${idx === columns.length - 1 ? classes.shiftCellEnd : ''}`}
