@@ -8,6 +8,7 @@ import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import { useDrawer } from '../../context/DrawerContext';
 import InfoDrawer from '../InfoDrawer/InfoDrawer';
 import useStyles from './MetricManager.styles';
+import RecommendationBanner from '../RecommendationBanner/RecommendationBanner';
 
 const DRAWER_WIDTH = 360;
 
@@ -72,11 +73,12 @@ const MetricManager = () => {
             <CustomTextButton text="Share this view" />
           </Box>
           <Box className={classes.divider}></Box>
+          <RecommendationBanner />
           <Box className={classes.notificationRow}>
             <IconButton>
               <NotificationsOutlinedIcon />
             </IconButton>
-            <Typography variant="body2">3 conflicts, 2 unassigned, 4 overtime</Typography>
+            <Typography variant="body2">Labor, food, and beverage costs have increased; review immediately.</Typography>
           </Box>
           <Box className={classes.tableContainer}>
             {Object.entries(metricsData).map(([category, metrics], idx) => (

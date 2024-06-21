@@ -59,6 +59,13 @@ const theme = createTheme({
       lineHeight: 2.66,
       textTransform: 'none',
     },
+    title1: {
+      fontFamily: 'Inter, Arial, sans-serif',
+      fontWeight: 400,
+      fontSize: '28px',
+      lineHeight: '34px',
+      textTransform: 'none',
+    }
   },
   palette: {
     mode: 'dark',
@@ -120,6 +127,20 @@ const theme = createTheme({
           },
         },
       },
+      variants: [
+        {
+          props: { variant: 'secondary' },
+          style: {
+            backgroundColor: '#007AFF',
+            color: '#FFFFFF',
+            borderRadius: '40px',
+            padding: '7px 14px',
+            '&:hover': {
+              backgroundColor: '#005BB5',
+            },
+          },
+        },
+      ],
     },
     MuiPaper: {
       styleOverrides: {
