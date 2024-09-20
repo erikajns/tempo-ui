@@ -20,22 +20,46 @@ const ShiftManager = ({ columns, events, unassignedShifts: initialUnassignedShif
   const classes = useStyles();
   const [unassignedShifts, setUnassignedShifts] = useState(initialUnassignedShifts);
 
+  // Handler for adding new shifts
   const handleAddShiftClick = () => {
     openDrawer(<AddShiftForm onClose={closeDrawer} onSave={handleSaveShift} />);
   };
 
+  // Saving a new unassigned shift
   const handleSaveShift = (newShift) => {
     setUnassignedShifts([...unassignedShifts, newShift]);
     closeDrawer();
   };
 
-  const handleUnnasignedShiftClick = () => {
-    openDrawer(<UnassignedShiftDetails />)
-  }
+  // Unassigned shift click handler
+  const handleUnassignedShiftClick = (shift) => {
+    openDrawer(
+      <UnassignedShiftDetails
+        shiftType={shift.role}
+        shiftStart={shift.start}
+        breakTime={shift.breakTime}
+        shiftEnd={shift.end}
+        notes={shift.notes}
+      />
+    );
+  };
 
-  const handleAsignedShiftClick = () => {
-    openDrawer(<AssignedShiftDetails />)
-  }
+  // Assigned shift click handler
+  const handleAssignedShiftClick = (shift) => {
+    openDrawer(
+      <AssignedShiftDetails
+        shiftType={shift.role}
+        assignee={{ name: shift.name, details: shift.sales, image: shift.image }}
+        shiftStart={shift.start}
+        breakTime={shift.breakTime}
+        shiftEnd={shift.end}
+        notes={shift.notes}
+        onUnassign={() => console.log('Unassign shift')}
+        onReportIncident={() => console.log('Report incident')}
+        onDelete={() => console.log('Delete shift')}
+      />
+    );
+  };
 
   return (
     <>
@@ -86,6 +110,7 @@ const ShiftManager = ({ columns, events, unassignedShifts: initialUnassignedShif
                 </TableRow>
               </TableHead>
               <TableBody>
+                {/* Unassigned shifts */}
                 <TableRow className={classes.sectionRow}>
                   <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>Unassigned Shifts</TableCell>
                 </TableRow>
@@ -96,7 +121,7 @@ const ShiftManager = ({ columns, events, unassignedShifts: initialUnassignedShif
                     </TableCell>
                     {columns.map((_, idx) => (
                       <TableCell
-                        onClick={handleUnnasignedShiftClick}
+                        onClick={() => handleUnassignedShiftClick(shift)} // Click handler for unassigned shifts
                         key={idx}
                         align="center"
                         className={`${classes.tableCell} ${classes.clickableCell} ${idx === columns.length - 1 ? classes.shiftCellEnd : ''}`}
@@ -106,6 +131,8 @@ const ShiftManager = ({ columns, events, unassignedShifts: initialUnassignedShif
                     ))}
                   </TableRow>
                 ))}
+
+                {/* Assigned shifts */}
                 <TableRow className={classes.sectionRow}>
                   <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>Assigned Shifts</TableCell>
                 </TableRow>
@@ -116,7 +143,7 @@ const ShiftManager = ({ columns, events, unassignedShifts: initialUnassignedShif
                     </TableCell>
                     {columns.map((_, idx) => (
                       <TableCell
-                        onClick={handleAsignedShiftClick}
+                        onClick={() => handleAssignedShiftClick(shift)} 
                         key={idx}
                         align="center"
                         className={`${classes.tableCell} ${classes.clickableCell} ${idx === columns.length - 1 ? classes.shiftCellEnd : ''}`}

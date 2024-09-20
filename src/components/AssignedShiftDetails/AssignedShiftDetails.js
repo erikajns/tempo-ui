@@ -18,7 +18,7 @@ const AssignedShiftDetails = ({ shiftType, assignee, shiftStart, breakTime, shif
       </Typography>
       <Box className={classes.assignedButton}>
         <Box display="flex" alignItems="center">
-          <Avatar alt={shiftType ? shiftType : 'Unassigned'} src="/static/images/avatar/1.jpg" className={classes.avatar}/>
+          <Avatar alt={shiftType ? shiftType : 'Unassigned'} src={assignee.image} className={classes.avatar}/>
           <Box>
             <Typography className={classes.infoText}>{assignee.name || "Unassigned"}</Typography>
             <Typography className={classes.infoText}>{assignee.details || ""}</Typography>
