@@ -1,10 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
-import shiftReducer from './slices/shiftSlice';
-import uiReducer from './slices/uiSlice'; // Optional, for UI state like drawers
+import shiftsReducer from './slices/shiftSlice.js';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    shifts: shiftReducer,
-    ui: uiReducer,  // Optional, for managing UI states
+    shifts: shiftsReducer,
   },
 });
+
+export default store;

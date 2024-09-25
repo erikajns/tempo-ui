@@ -8,6 +8,7 @@ const useStyles = makeStyles({
     borderRadius: '16px',
     padding: '16px',
     overflowX: 'auto',
+    backgroundImage: 'unset !important'
   },
   tableHeader: {
     backgroundColor: '#000000',
