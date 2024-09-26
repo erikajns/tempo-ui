@@ -68,6 +68,28 @@ const useStyles = makeStyles({
   },
   dateHeader: {
     color: 'white !important'
+  },
+  actualsLabel: {
+    color: 'white',
+    fontWeight: 'bold',
+  },
+  totalValue: {
+    fontWeight: 'bold',
+    color: 'white',
+  },
+  positivePercentage: {
+    color: 'red',
+  },
+  negativePercentage: {
+    color: 'green',
+  },
+  metricsTableCell: {
+    backgroundColor: 'rgba(37, 37, 37, 0.55) !important',
+    border: 'none !important',
+  },
+  metricsCell: {
+    display: 'flex',
+    justifyContent: 'space-evenly'
   }
 });
 

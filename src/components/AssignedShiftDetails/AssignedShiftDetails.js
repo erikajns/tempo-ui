@@ -3,7 +3,7 @@ import { Box, Typography, Button, Avatar } from '@mui/material';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import useStyles from './AssignedShiftDetails.styles';
 
-const AssignedShiftDetails = ({ shiftType, assignee, shiftStart, breakTime, shiftEnd, notes, onUnassign, onReportIncident, onDelete }) => {
+const AssignedShiftDetails = ({ shiftType, name, image,details, shiftStart, breakTime, shiftEnd, notes, onUnassign, onReportIncident, onDelete }) => {
   const classes = useStyles();
 
   const formatTime = (time) => {
@@ -18,10 +18,10 @@ const AssignedShiftDetails = ({ shiftType, assignee, shiftStart, breakTime, shif
       </Typography>
       <Box className={classes.assignedButton}>
         <Box display="flex" alignItems="center">
-          <Avatar alt={shiftType ? shiftType : 'Unassigned'} src={assignee.image} className={classes.avatar}/>
+          <Avatar alt={shiftType ? shiftType : 'Unassigned'} src={image} className={classes.avatar}/>
           <Box>
-            <Typography className={classes.infoText}>{assignee.name || "Unassigned"}</Typography>
-            <Typography className={classes.infoText}>{assignee.details || ""}</Typography>
+            <Typography className={classes.infoText}>{name || "Unassigned"}</Typography>
+            <Typography className={classes.infoText}>{details || ""}</Typography>
           </Box>
         </Box>
         <ArrowForwardIosIcon />

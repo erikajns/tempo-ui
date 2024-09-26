@@ -15,15 +15,17 @@ import useStyles from './ShiftManager.styles';
 import { useDispatch, useSelector } from 'react-redux';
 import { addShift, assignShift } from '../../redux/slices/shiftSlice.js';
 
-
 const DRAWER_WIDTH = 360;
 
-const ShiftManager = ({ columns, events, metrics }) => {
+const ShiftManager = ({ columns, events, metrics = [] }) => {
   const { isDrawerOpen, openDrawer, closeDrawer } = useDrawer();
   const classes = useStyles();
   const dispatch = useDispatch();
   const unassignedShifts = useSelector((state) => state.shifts.unassignedShifts);
   const assignedShifts = useSelector((state) => state.shifts.assignedShifts);
+
+  // Extract the first metric separately from the rest
+  const [firstMetric, ...otherMetrics] = metrics;
 
   // Handler for adding new shifts
   const handleAddShiftClick = () => {
@@ -34,12 +36,6 @@ const ShiftManager = ({ columns, events, metrics }) => {
       />
     );
   };
-
-  // // Saving a new unassigned shift
-  // const handleSaveShift = (newShift) => {
-  //   setUnassignedShifts([...unassignedShifts, newShift]);
-  //   closeDrawer();
-  // };
 
   // Unassigned shift click handler
   const handleUnassignedShiftClick = (shiftId) => {
@@ -55,6 +51,12 @@ const ShiftManager = ({ columns, events, metrics }) => {
     openDrawer(<AssignedShiftDetails {...shift} />);
   };
 
+  // Function to handle percentage coloring based on positive/negative value
+  const getPercentageColor = (percentage) => {
+    const isNegative = percentage.startsWith('-');
+    return isNegative ? classes.negativePercentage : classes.positivePercentage;
+  };
+
   return (
     <>
       <Box 
@@ -62,7 +64,7 @@ const ShiftManager = ({ columns, events, metrics }) => {
         justifyContent="space-between"
         width="100%"
       >
-        <Box flexGrow={1} mr={isDrawerOpen ? `${DRAWER_WIDTH}px` : '0'} bgcolor="#000000" borderRadius="16px" p={2} maxHeight="90vh" overflow="auto">
+        <Box flexGrow={1} mr={isDrawerOpen ? `${DRAWER_WIDTH}px` : '0'} bgcolor="#000000" borderRadius="16px" p={2} maxHeight="calc(100vh - 50px)" overflow="auto">
           <Box display="flex" justifyContent="space-between" alignItems="center" marginBottom="16px">
             <Box display="flex" gap="16px">
               <CustomTextButton text="Azure Table" />
@@ -120,7 +122,7 @@ const ShiftManager = ({ columns, events, metrics }) => {
                               onClick={() => handleUnassignedShiftClick(shift.id)}
                               className={`${classes.tableCell} ${classes.clickableCell}`}
                             >
-                              <Typography variant="body2">{shift.time}</Typography>
+                              <Typography variant="body2">{shift.shiftStart} - {shift.shiftEnd}</Typography>
                             </TableCell>
                           ))}
                         </TableRow>
@@ -150,17 +152,30 @@ const ShiftManager = ({ columns, events, metrics }) => {
               </TableBody>
               <TableFooter>
                 <TableRow>
-                  <TableCell>
-                    Actuals
+                  <TableCell className={classes.metricsTableCell} >
+                    <div className={classes.metricsCell}>
+                      <Typography variant="body2" className={classes.actualsLabel}>Actuals</Typography>
+                      <div>
+                        <Typography variant="body2" className={getPercentageColor(firstMetric?.percentage)}>
+                          <b>{firstMetric ? firstMetric.percentage : '-'}</b>
+                        </Typography>
+                        <Typography variant="body2" className={classes.totalValue}>
+                          <b>{firstMetric ? firstMetric.totals : '-'}</b>
+                        </Typography>
+                      </div>
+                    </div>
                   </TableCell>
-                  {metrics.map((_, idx) => (
+                  {otherMetrics.map((metric, idx) => (
                       <TableCell
                         key={idx}
-                        align="center"
-                        className={`${classes.tableCell} ${classes.clickableCell} ${idx === columns.length - 1 ? classes.shiftCellEnd : ''}`}
+                        className={classes.metricsTableCell}
                       >
-                        <Typography variant="body2">{metrics.percentage}</Typography>
-                        <Typography variant="body2">{metrics.totals}</Typography>
+                        <Typography variant="body2" className={getPercentageColor(metric?.percentage)}>
+                          <b>{metric?.percentage || '-'}</b>
+                        </Typography>
+                        <Typography variant="body2" className={classes.totalValue}>
+                          <b> {metric?.totals || '-'}</b>
+                        </Typography>
                       </TableCell>
                     ))}
                 </TableRow>
