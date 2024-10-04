@@ -43,7 +43,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-// SideBar component renders the sidebar navigation with menu items
 const SideBar = () => {
   const classes = useStyles();
 

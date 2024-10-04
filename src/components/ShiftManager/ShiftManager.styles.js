@@ -90,7 +90,18 @@ const useStyles = makeStyles({
   metricsCell: {
     display: 'flex',
     justifyContent: 'space-evenly'
-  }
+  },
+  stickyFooter: {
+    position: 'sticky',
+    bottom: '0',
+    backgroundColor: 'rgba(37, 37, 37, 0.55)', /* Opacity applied to background only */
+    zIndex: '1',
+  },
+  selected: {
+    backgroundColor: '#3A3A3C !important', /* Same as hover background */
+    fontWeight: 'bold',
+    color: 'white' /* Or any other color */
+  }  
 });
 
 export default useStyles;

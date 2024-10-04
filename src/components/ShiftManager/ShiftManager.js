@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CustomTextButton from '../CustomTextButton/CustomTextButton';
 import AddIcon from '@mui/icons-material/Add';
 import CalendarTodayIcon from '@mui/icons-material/CalendarToday';
 import GroupIcon from '@mui/icons-material/Group';
 import NotificationsOutlinedIcon from '@mui/icons-material/NotificationsOutlined';
-import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography, TableFooter } from '@mui/material';
+import { Box, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, Typography } from '@mui/material';
 import EmployeeShiftCard from '../EmployeeShiftCard/EmployeeShiftCard';
 import { useDrawer } from '../../context/DrawerContext';
 import InfoDrawer from '../InfoDrawer/InfoDrawer';
@@ -17,15 +17,15 @@ import { addShift, assignShift } from '../../redux/slices/shiftSlice.js';
 
 const DRAWER_WIDTH = 360;
 
-const ShiftManager = ({ columns, events, metrics = [] }) => {
+const ShiftManager = ({ columns, events }) => {
   const { isDrawerOpen, openDrawer, closeDrawer } = useDrawer();
   const classes = useStyles();
   const dispatch = useDispatch();
+
+  const [selectedShiftId, setSelectedShiftId] = useState(null); // Track selected shift ID
+
   const unassignedShifts = useSelector((state) => state.shifts.unassignedShifts);
   const assignedShifts = useSelector((state) => state.shifts.assignedShifts);
-
-  // Extract the first metric separately from the rest
-  const [firstMetric, ...otherMetrics] = metrics;
 
   // Handler for adding new shifts
   const handleAddShiftClick = () => {
@@ -39,6 +39,7 @@ const ShiftManager = ({ columns, events, metrics = [] }) => {
 
   // Unassigned shift click handler
   const handleUnassignedShiftClick = (shiftId) => {
+    setSelectedShiftId(shiftId); // Set selected shift
     openDrawer(
       <UnassignedShiftDetails
         onAssign={(assignee) => dispatch(assignShift({ shiftId, assignee }))}
@@ -47,24 +48,30 @@ const ShiftManager = ({ columns, events, metrics = [] }) => {
   };
 
   // Assigned shift click handler
-  const handleAssignedShiftClick = (shift) => {
-    openDrawer(<AssignedShiftDetails {...shift} />);
+  const handleAssignedShiftClick = (shiftId) => {
+    setSelectedShiftId(shiftId); // Set selected shift
+    openDrawer(<AssignedShiftDetails shiftId={shiftId} />);
   };
 
-  // Function to handle percentage coloring based on positive/negative value
-  const getPercentageColor = (percentage) => {
-    const isNegative = percentage.startsWith('-');
-    return isNegative ? classes.negativePercentage : classes.positivePercentage;
-  };
+  // Reset selectedShiftId when the drawer is closed
+  useEffect(() => {
+    if (!isDrawerOpen) {
+      setSelectedShiftId(null); // Clear selected shift when drawer closes
+    }
+  }, [isDrawerOpen]);
 
   return (
     <>
-      <Box 
-        display="flex"
-        justifyContent="space-between"
-        width="100%"
-      >
-        <Box flexGrow={1} mr={isDrawerOpen ? `${DRAWER_WIDTH}px` : '0'} bgcolor="#000000" borderRadius="16px" p={2} maxHeight="calc(100vh - 50px)" overflow="auto">
+      <Box display="flex" justifyContent="space-between" width="100%">
+        <Box
+          flexGrow={1}
+          mr={isDrawerOpen ? `${DRAWER_WIDTH}px` : '0'}
+          bgcolor="#000000"
+          borderRadius="16px"
+          p={2}
+          maxHeight="90vh"
+          overflow="auto"
+        >
           <Box display="flex" justifyContent="space-between" alignItems="center" marginBottom="16px">
             <Box display="flex" gap="16px">
               <CustomTextButton text="Azure Table" />
@@ -110,39 +117,39 @@ const ShiftManager = ({ columns, events, metrics = [] }) => {
                 <TableRow className={classes.sectionRow}>
                   <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>Unassigned Shifts</TableCell>
                 </TableRow>
-                {unassignedShifts.map((shift, index) => (
-                        <TableRow key={index} className={classes.shiftRow}>
-                          <TableCell className={`${classes.shiftCell}`} align="center">
-                            <EmployeeShiftCard {...shift} />
-                          </TableCell>
-                          {columns.map((_, idx) => (
-                            <TableCell
-                              key={idx}
-                              align="center"
-                              onClick={() => handleUnassignedShiftClick(shift.id)}
-                              className={`${classes.tableCell} ${classes.clickableCell}`}
-                            >
-                              <Typography variant="body2">{shift.shiftStart} - {shift.shiftEnd}</Typography>
-                            </TableCell>
-                          ))}
-                        </TableRow>
-                      ))}
-
-                {/* Assigned shifts */}
-                <TableRow className={classes.sectionRow}>
-                  <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>Assigned Shifts</TableCell>
-                </TableRow>
-                {assignedShifts.map((shift, index) => (
-                  <TableRow key={index} className={classes.shiftRow}>
+                {unassignedShifts.map((shift) => (
+                  <TableRow key={shift.id} className={classes.shiftRow}>
                     <TableCell className={`${classes.shiftCell}`} align="center">
                       <EmployeeShiftCard {...shift} />
                     </TableCell>
                     {columns.map((_, idx) => (
                       <TableCell
-                        onClick={() => handleAssignedShiftClick(shift)} 
                         key={idx}
                         align="center"
-                        className={`${classes.tableCell} ${classes.clickableCell} ${idx === columns.length - 1 ? classes.shiftCellEnd : ''}`}
+                        onClick={() => handleUnassignedShiftClick(shift.id)}
+                        className={`${classes.tableCell} ${classes.clickableCell} ${shift.id === selectedShiftId ? classes.selected : ''}`}
+                      >
+                        <Typography variant="body2">{shift.shiftStart} - {shift.shiftEnd}</Typography>
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))}
+
+                {/* Assigned shifts */}
+                <TableRow className={classes.sectionRow}>
+                  <TableCell className={classes.sectionTitle} colSpan={columns.length + 1}>Assigned Shifts</TableCell>
+                </TableRow>
+                {assignedShifts.map((shift) => (
+                  <TableRow key={shift.id} className={classes.shiftRow}>
+                    <TableCell className={`${classes.shiftCell}`} align="center">
+                      <EmployeeShiftCard {...shift} />
+                    </TableCell>
+                    {columns.map((_, idx) => (
+                      <TableCell
+                        key={idx}
+                        align="center"
+                        onClick={() => handleAssignedShiftClick(shift.id)}
+                        className={`${classes.tableCell} ${classes.clickableCell} ${shift.id === selectedShiftId ? classes.selected : ''}`}
                       >
                         <Typography variant="body2">3:30pm - 10:00pm</Typography>
                       </TableCell>
@@ -150,36 +157,6 @@ const ShiftManager = ({ columns, events, metrics = [] }) => {
                   </TableRow>
                 ))}
               </TableBody>
-              <TableFooter>
-                <TableRow>
-                  <TableCell className={classes.metricsTableCell} >
-                    <div className={classes.metricsCell}>
-                      <Typography variant="body2" className={classes.actualsLabel}>Actuals</Typography>
-                      <div>
-                        <Typography variant="body2" className={getPercentageColor(firstMetric?.percentage)}>
-                          <b>{firstMetric ? firstMetric.percentage : '-'}</b>
-                        </Typography>
-                        <Typography variant="body2" className={classes.totalValue}>
-                          <b>{firstMetric ? firstMetric.totals : '-'}</b>
-                        </Typography>
-                      </div>
-                    </div>
-                  </TableCell>
-                  {otherMetrics.map((metric, idx) => (
-                      <TableCell
-                        key={idx}
-                        className={classes.metricsTableCell}
-                      >
-                        <Typography variant="body2" className={getPercentageColor(metric?.percentage)}>
-                          <b>{metric?.percentage || '-'}</b>
-                        </Typography>
-                        <Typography variant="body2" className={classes.totalValue}>
-                          <b> {metric?.totals || '-'}</b>
-                        </Typography>
-                      </TableCell>
-                    ))}
-                </TableRow>
-              </TableFooter>
             </Table>
           </TableContainer>
         </Box>

@@ -9,6 +9,7 @@ import { useDrawer } from '../../context/DrawerContext';
 import InfoDrawer from '../InfoDrawer/InfoDrawer';
 import useStyles from './MetricManager.styles';
 import RecommendationBanner from '../RecommendationBanner/RecommendationBanner';
+import MetricDetailsDrawer from '../MetricDetailsDrawer/MetricDetailsDrawer';
 
 const DRAWER_WIDTH = 360;
 
@@ -47,12 +48,17 @@ const MetricManager = () => {
   const handleSelect = (metric) => {
     setSelectedMetric(metric.id === selectedMetric ? null : metric.id);
     openDrawer(
-      <Box p={2}>
-        <Typography variant="h6">{metric.title}</Typography>
-        <Typography variant="body2">{metric.valueFrom} → {metric.valueTo}</Typography>
-        <Typography variant="body2">{metric.percentageChange}</Typography>
-        {/* Aquí puedes agregar más contenido para el drawer de métricas */}
-      </Box>
+      <MetricDetailsDrawer 
+        chartPlaceholder={null}
+        insightTitle="Labor cost spike"
+        insightText="The labor cost for the week of Feb 4 - 10, 2024, consistently exceeded the six-month average baseline..."
+        causeTitle="Overstaffing or inefficiency"
+        causeText="Overstaffing or inefficiency due to poor scheduling during less busy hours..."
+        recommendationTitle="Optimize Staffing Levels"
+        recommendationText="Adjust staff schedules to match peak and off-peak hours, reducing overstaffed shifts."
+        buttonLabel="Adjust shift template"
+        onButtonClick={() => console.log('Button Clicked!')}
+      />
     );
   };
 

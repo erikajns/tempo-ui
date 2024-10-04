@@ -4,6 +4,7 @@ const initialState = {
   unassignedShifts: [
     {
       role: 'Bartender',
+      id: 1,
       name: 'Unassigned',
       hours: '48',
       isAssigned: false,
@@ -14,6 +15,7 @@ const initialState = {
     },
     {
       role: 'Host',
+      id: 2,
       name: 'Unassigned',
       hours: '48',
       isAssigned: false,
@@ -24,6 +26,7 @@ const initialState = {
     },
     {
       role: 'Bartender',
+      id: 3,
       name: 'Unassigned',
       hours: '48',
       isAssigned: false,
@@ -36,6 +39,7 @@ const initialState = {
   assignedShifts: [
     {
       role: 'Bartender',
+      id: 4,
       name: 'Jane Doe',
       hours: '48',
       overtime: '8',
@@ -49,6 +53,7 @@ const initialState = {
     },
     {
       role: 'Bartender',
+      id: 5,
       name: 'Kane Smith',
       hours: '40',
       isAssigned: true,
@@ -61,6 +66,7 @@ const initialState = {
     },
     {
       role: 'Bartender',
+      id: 6,
       name: 'Jane Cooper',
       hours: '32',
       isAssigned: true,
